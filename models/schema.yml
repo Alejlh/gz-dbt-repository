@@ -1,0 +1,10 @@
+sources:
+  - name: gz_raw_data
+    description: Raw data greenwezz
+    tables: 
+      - name: sales
+        description: Greenwezz Raw Sales
+      - name: product
+        description: Greenwezz Product
+      - name: ship
+        description: Greenwezz Ship
