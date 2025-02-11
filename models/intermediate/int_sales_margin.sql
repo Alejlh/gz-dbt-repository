@@ -1,17 +1,18 @@
-With int_table AS (
+with
+    int_table as (
 
-SELECT *,
-FROM {{ ref('stg_raw__sales')}} AS t_s
-LEFT JOIN {{ ref('stg_raw__product')}} as t_p
-USING(products_id)
+        select *,
+        from {{ ref("stg_raw__sales") }} as t_s
+        left join {{ ref("stg_raw__product") }} as t_p using (products_id)
 
-)
+    )
 
-SELECT date_date,
-products_id,
-orders_id,
-revenue,
-quantity,
-ROUND(quantity*purchase_price,2) AS purchase_cost,
-ROUND(revenue-ROUND(quantity*purchase_price,2),2) AS margin,
-FROM int_table
+select
+    date_date,
+    products_id,
+    orders_id,
+    revenue,
+    quantity,
+    round(quantity * purchase_price, 2) as purchase_cost,
+    round(revenue - round(quantity * purchase_price, 2), 2) as margin,
+from int_table
