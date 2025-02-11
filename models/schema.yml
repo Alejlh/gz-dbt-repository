@@ -1,5 +1,5 @@
 sources:
-  - name: gz_raw_data
+  - name: raw
     description: Raw data greenwezz
     tables: 
       - name: sales
