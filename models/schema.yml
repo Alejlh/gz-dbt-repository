@@ -1,0 +1,54 @@
+sources:
+  - name: raw
+    schema: gz_raw_data
+    description: Raw data greenwezz
+    tables: 
+      - name: sales
+        identifier: raw_gz_sales
+        description: Greenwezz Raw Sales
+        loaded_at_field: "CAST(date_date AS TIMESTAMP)" 
+        freshness: 
+          warn_after: {count: 90, period: day}
+        
+        columns:
+          - name: date_date
+            description: Date of purchase
+          - name: orders_id
+            description: Order number          
+          - name: products_id
+            description: Product Unique Number
+          - name: revenue
+            description: Total revenue per product in an order     
+          - name: quantity
+            description: Number of purchased products in one order      
+      - name: product
+        identifier: raw_gz_product
+        description: Greenwezz Product
+        columns:
+          - name: products_id
+            description: Product Unique Number
+            tests:
+              - unique:
+                  column_name: products_id
+              - not_null
+          - name: purchase_price
+            description: Product Price
+
+      - name: ship
+        identifier: raw_gz_ship
+        description: Greenwezz Ship
+        columns:
+          - name: orders_id
+            description: Order number
+            tests:
+              - unique:
+                  column_name: orders_id
+              - not_null
+          - name: shipping_fee
+            description: Order shipping fee
+          - name: log_cost
+            description: Order logistic cost
+          - name: ship_cost
+            description: Order shipping cost
+
+                  
