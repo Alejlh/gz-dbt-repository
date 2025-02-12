@@ -9,7 +9,6 @@ sources:
         loaded_at_field: "CAST(date_date AS TIMESTAMP)" 
         freshness: 
           warn_after: {count: 90, period: day}
-        
         columns:
           - name: date_date
             description: Date of purchase
@@ -50,5 +49,60 @@ sources:
             description: Order logistic cost
           - name: ship_cost
             description: Order shipping cost
-
+      - name: adwords
+        identifier: raw_gz_adwords
+        description: Greenwezz Adwords
+        columns:
+          - name: "(campaign_key||'-'||date_date)"
+            description: Primary key 
+            tests:
+              - unique
+              - not_null
                   
+
+      - name: criteo
+        identifier: raw_gz_criteo
+        description: Greenwezz Adwords
+        columns:
+          - name: "(campaign_key||'-'||date_date)"
+            description: Primary key 
+            tests:
+              - unique
+              - not_null
+        
+      - name: facebook
+        identifier: raw_gz_facebook
+        description: Greenwezz Adwords
+        columns:
+          - name: "(campaign_key||'-'||date_date)"
+            description: Primary key 
+            tests:
+              - unique
+              - not_null
+      - name: bing
+        identifier: raw_gz_bing
+        description: Greenwezz Adwords
+        columns:
+          - name: "(campaign_key||'-'||date_date)"
+            description: Primary key 
+            tests:
+              - unique
+              - not_null
+models: 
+   - name: int_campaings
+     description: Merge all campaings tables
+     columns:
+        - name: "(campaign_key||'-'||date_date)"
+          description: Primary key 
+          tests:
+            - unique
+            - not_null
+   - name: int_campaings_day
+     description: Group by day info
+     columns:
+        - name: date_date
+          description: Primary key 
+          tests:
+            - unique
+            - not_null            
+             
